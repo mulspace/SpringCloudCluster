@@ -20,5 +20,9 @@ public class HelloControler {
         return helloService.hiService(name);
     }
 
+    @RequestMapping(value = "/user")
+    public String user(){
+        return helloService.userService();
+    }
 
 }

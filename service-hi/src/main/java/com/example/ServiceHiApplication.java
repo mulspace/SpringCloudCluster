@@ -20,19 +20,26 @@ public class ServiceHiApplication {
 		SpringApplication.run(ServiceHiApplication.class, args);
 	}
 
+	private String hostname;
+	public ServiceHiApplication() {
+		try {
+			hostname = InetAddress.getLocalHost().getHostName();
+		} catch (UnknownHostException e) {
+			hostname = "unknown";
+		}
+	}
+
 	@Value("${server.port}")
 	String port;
 	@RequestMapping("/hi")
 	public String home(@RequestParam String name) {
-		String hostname;
-		
-		try {
-			hostname = InetAddress.getLocalHost().getHostName();
-		} catch (UnknownHostException e) {
-				hostname = "unknown";
-		}
-
 		return "hi "+name+",i am " + hostname + " from port:" +port;
+	}
+
+	@RequestMapping("/user")
+	public String user() {
+
+		return "[{\"name\":\"test\", \"hostname\":\"" + hostname + "\"}]";
 	}
 
 }
