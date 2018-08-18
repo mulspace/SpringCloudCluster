@@ -11,20 +11,23 @@
     <name>${project.artifactId}</name>
 	<description>Parent project Spring Cloud Cluster</description>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.2.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
         <!-- skip docker build for non-docker module -->
         <project.skipDockerBuild>true</project.skipDockerBuild>
+        <!-- Only change here if you want to use another version of spring boot/cloud -->
+        <project.spring.boot.version>1.5.13.RELEASE</project.spring.boot.version>
+        <project.spring.cloud.version>Dalston.SR5</project.spring.cloud.version>
 	</properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.13.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <modules>
         <module>eureka-server</module>
@@ -42,11 +45,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
-	<dependencyManagement>
-		<dependencies>
+    <!-- All child project could inherited from the version here -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${project.spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -84,17 +94,5 @@
             </plugin>
 		</plugins>
 	</build>
-
-    <!-- Private repo, need to remove after test -->
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
 
