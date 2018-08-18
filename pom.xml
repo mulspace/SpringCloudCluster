@@ -17,9 +17,8 @@
 		<java.version>1.8</java.version>
         <!-- skip docker build for non-docker module -->
         <project.skipDockerBuild>true</project.skipDockerBuild>
-        <!-- Only change here if you want to use another version of spring boot/cloud -->
-        <project.spring.boot.version>1.5.13.RELEASE</project.spring.boot.version>
-        <project.spring.cloud.version>Dalston.SR5</project.spring.cloud.version>
+        <!-- Only change here if you want to use another version of spring cloud -->
+        <project.spring.cloud.version>Edgware.SR4</project.spring.cloud.version>
 	</properties>
 
     <parent>
